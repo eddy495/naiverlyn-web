@@ -1,0 +1,211 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100svh;
+    padding: 24px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+
+    font-family: Georgia, "Times New Roman", serif;
+    color: white;
+    text-align: center;
+
+    background:
+        linear-gradient(
+            rgba(8, 3, 8, 0.68),
+            rgba(8, 3, 8, 0.86)
+        ),
+        url("fondo-romantico.png") center / cover fixed,
+        #100609;
+}
+
+.tarjeta {
+    position: relative;
+    z-index: 2;
+    width: min(100%, 620px);
+    padding: 38px 25px;
+
+    border: 1px solid rgba(255, 170, 185, 0.35);
+    border-radius: 24px;
+    background: rgba(18, 5, 12, 0.72);
+    backdrop-filter: blur(8px);
+
+    box-shadow: 0 0 55px rgba(180, 20, 65, 0.16);
+    animation: aparecer 1.5s ease both;
+}
+
+.etiqueta {
+    margin-bottom: 22px;
+    color: #e8a2b2;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font: 11px Arial, sans-serif;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #ffd6df;
+    font-size: clamp(34px, 8vw, 60px);
+    font-weight: normal;
+    overflow-wrap: anywhere;
+    text-shadow: 0 0 24px rgba(255, 70, 120, 0.55);
+}
+
+.rosa {
+    margin-bottom: 22px;
+    color: #ff718f;
+    font-size: 35px;
+    animation: latido 1.8s infinite;
+}
+
+.mensaje,
+.texto-carta {
+    max-width: 440px;
+    margin: 0 auto 25px;
+    color: #f4e5e9;
+    font-size: 18px;
+    line-height: 1.9;
+}
+
+button {
+    margin: 6px;
+    padding: 13px 22px;
+
+    border: 1px solid #d97991;
+    border-radius: 30px;
+    background: #7d1837;
+    color: white;
+
+    font-size: 15px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #a62b50;
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(156, 37, 75, 0.4);
+}
+
+button:focus-visible {
+    outline: 2px solid #ffd6df;
+    outline-offset: 4px;
+}
+
+#carta {
+    margin-top: 25px;
+    padding-top: 22px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    animation: aparecer 1s ease;
+}
+
+#carta h2 {
+    margin: 18px 0;
+    color: #ffd6df;
+    font-size: clamp(20px, 5vw, 26px);
+    font-weight: normal;
+    line-height: 1.5;
+}
+
+.botones-respuesta {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#respuesta {
+    min-height: 28px;
+    margin-top: 16px;
+    color: #ffb4c7;
+    line-height: 1.7;
+}
+
+.corazon {
+    position: fixed;
+    bottom: -30px;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.8;
+    animation: flotar linear forwards;
+}
+
+footer {
+    margin-top: 28px;
+    color: #cda9b4;
+    font: 10px Arial, sans-serif;
+    letter-spacing: 1px;
+    line-height: 1.8;
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes latido {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.18);
+    }
+}
+
+@keyframes flotar {
+    to {
+        transform: translateY(-115vh) rotate(35deg);
+        opacity: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .tarjeta {
+        padding: 30px 18px;
+    }
+
+    .mensaje,
+    .texto-carta {
+        font-size: 16px;
+    }
+
+    button {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        background-attachment: scroll;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
