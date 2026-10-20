@@ -9,26 +9,25 @@ document.addEventListener("DOMContentLoaded", () => {
     const respuesta = document.getElementById("respuesta");
     const botonesRespuesta = document.querySelectorAll("[data-respuesta]");
 
-    // Abrir y cerrar la sorpresa.
+    // Abrir y cerrar la carta.
     if (botonAbrir && carta) {
         botonAbrir.addEventListener("click", () => {
-            const estaOculta = carta.hidden;
+            carta.hidden = !carta.hidden;
 
-            carta.hidden = !estaOculta;
+            botonAbrir.textContent = carta.hidden
+                ? "Descubre tu sorpresa 💌"
+                : "Cerrar mi sorpresa 💌";
 
-            if (estaOculta) {
-                botonAbrir.textContent = "Cerrar mi sorpresa 💌";
+            if (!carta.hidden) {
                 carta.scrollIntoView({
                     behavior: "smooth",
                     block: "nearest"
                 });
-            } else {
-                botonAbrir.textContent = "Descubre tu sorpresa 💌";
             }
         });
     }
 
-    // Reproducir o pausar la música.
+    // Activar y pausar la música.
     if (botonMusica && musica) {
         botonMusica.addEventListener("click", async () => {
             if (musica.paused) {
@@ -36,8 +35,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     await musica.play();
                     botonMusica.textContent = "Ⅱ Pausar música";
                 } catch (error) {
-                    botonMusica.textContent = "No se pudo reproducir ♫";
-                    console.error("Error al reproducir la música:", error);
+                    console.error("No se pudo reproducir la música:", error);
+                    botonMusica.textContent = "Intenta activar la música ♫";
                 }
             } else {
                 musica.pause();
@@ -45,67 +44,72 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        musica.addEventListener("ended", () => {
+        musica.addEventListener("pause", () => {
             botonMusica.textContent = "♫ Activar música";
+        });
+
+        musica.addEventListener("play", () => {
+            botonMusica.textContent = "Ⅱ Pausar música";
         });
     }
 
-    // Mostrar el mensaje según la respuesta.
+    // Respuestas de la carta.
     botonesRespuesta.forEach((boton) => {
         boton.addEventListener("click", () => {
             if (!respuesta) return;
 
-            const opcion = boton.dataset.respuesta;
-
-            if (opcion === "si") {
+            if (boton.dataset.respuesta === "si") {
                 respuesta.textContent =
                     "¡Me alegra mucho! ❤️ Gracias por darme la oportunidad.";
-            } else if (opcion === "pensar") {
+            } else if (boton.dataset.respuesta === "pensar") {
                 respuesta.textContent =
-                    "Está bien. Tómate tu tiempo; lo importante es que te sientas cómoda. 💗";
+                    "Está bien. Tómate tu tiempo. Lo importante es que te sientas cómoda. 💗";
             }
         });
     });
 
-    console.log("Página de Naiverlyn cargada correctamente ❤️");
-});
-
-// Crear estrellas y corazones flotantes.
-(() => {
-    const iniciarEfectos = () => {
+    // Crear estrellas y corazones flotantes.
+    function crearEfectos() {
         const fondo = document.getElementById("efectos-fondo");
-        if (!fondo || fondo.dataset.iniciado === "si") return;
 
-        fondo.dataset.iniciado = "si";
+        if (!fondo) {
+            console.error("No se encontró el contenedor de efectos.");
+            return;
+        }
+
+        fondo.replaceChildren();
 
         const simbolos = [
             { texto: "♥", clase: "corazon" },
             { texto: "♡", clase: "corazon" },
+            { texto: "❤", clase: "corazon" },
             { texto: "✦", clase: "estrella" },
             { texto: "✧", clase: "estrella" },
-            { texto: "⋆", clase: "estrella" }
+            { texto: "⋆", clase: "estrella" },
+            { texto: "★", clase: "estrella" }
         ];
 
-        for (let i = 0; i < 28; i++) {
-            const efecto = simbolos[
-                Math.floor(Math.random() * simbolos.length)
-            ];
+        for (let i = 0; i < 36; i++) {
+            const simbolo =
+                simbolos[Math.floor(Math.random() * simbolos.length)];
 
             const particula = document.createElement("span");
-            particula.className = `particula ${efecto.clase}`;
-            particula.textContent = efecto.texto;
+            particula.className = `particula ${simbolo.clase}`;
+            particula.textContent = simbolo.texto;
+
+            const duracion = 8 + Math.random() * 12;
+            const retraso = Math.random() * -20;
+
             particula.style.left = `${Math.random() * 100}%`;
             particula.style.fontSize = `${12 + Math.random() * 18}px`;
-            particula.style.animationDuration = `${8 + Math.random() * 12}s`;
-            particula.style.animationDelay = `${-Math.random() * 18}s`;
+            particula.style.animationDuration = `${duracion}s`;
+            particula.style.animationDelay = `${retraso}s`;
 
             fondo.appendChild(particula);
         }
-    };
 
-    if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", iniciarEfectos);
-    } else {
-        iniciarEfectos();
+        console.log("Estrellas y corazones activados ❤️");
     }
-})();
+
+    crearEfectos();
+});
