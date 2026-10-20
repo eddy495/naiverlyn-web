@@ -208,4 +208,61 @@ footer {
         scroll-behavior: auto !important;
         transition-duration: 0.01ms !important;
     }
+
+}
+/* Estrellas y corazones flotantes */
+#efectos-fondo {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.tarjeta {
+    position: relative;
+    z-index: 1;
+}
+
+.particula {
+    position: absolute;
+    bottom: -50px;
+    opacity: 0;
+    animation: flotar-fondo linear infinite;
+    user-select: none;
+    will-change: transform, opacity;
+}
+
+.particula.corazon {
+    color: #ff80ad;
+    text-shadow: 0 0 12px #ff4d88;
+}
+
+.particula.estrella {
+    color: #fff2b0;
+    text-shadow: 0 0 12px #ffe47a;
+}
+
+@keyframes flotar-fondo {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(.7);
+        opacity: 0;
+    }
+    15% {
+        opacity: .85;
+    }
+    80% {
+        opacity: .8;
+    }
+    100% {
+        transform: translateY(-115vh) rotate(35deg) scale(1.2);
+        opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .particula {
+        animation: none;
+        display: none;
+    }
 }
