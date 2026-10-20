@@ -1,14 +1,15 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#100609">
-    <title>Para Naiverlyn Polanco ❤️</title>
 
-    <link rel="stylesheet" href="styles.css">
-   <script src="Script.js" defer></script>
+    <title>Para Naiverlyn Polanco ❤️</title>
+    <meta name="description" content="Un pequeño detalle hecho con cariño para Naiverlyn Polanco.">
+
+    <link rel="stylesheet" href="./styles.css?v=2">
+    <script src="./Script.js?v=2" defer></script>
 </head>
 
 <body>
@@ -24,30 +25,28 @@
         <p class="mensaje">
             Hay personas que llegan sin avisar y, poco a poco,
             hacen que un día normal se vuelva especial.
-
             <br><br>
-
             Quería dedicarte este pequeño rincón,
             porque hay cosas bonitas que merecen ser expresadas.
         </p>
 
-        <button id="abrir" type="button">
-            Descubre tu sorpresa 💌
-        </button>
+        <div class="controles">
+            <button id="abrir" type="button">
+                Descubre tu sorpresa 💌
+            </button>
 
-        <button id="musicaBtn" type="button">
-            ♫ Activar música
-        </button>
+            <button id="musicaBtn" type="button">
+                ♫ Activar música
+            </button>
+        </div>
 
-        <audio id="musica" src="musica.mp3" loop preload="none"></audio>
+        <audio id="musica" src="./musica.mp3" loop preload="none"></audio>
 
         <section id="carta" hidden>
             <p class="texto-carta">
                 Naiverlyn, quería que supieras que me gusta tu forma
                 de ser y que me alegra poder conocerte.
-
                 <br><br>
-
                 No sé qué nos tenga preparado el futuro,
                 pero sí quería regalarte este detalle y sacarte
                 una sonrisa. ❤️
@@ -68,7 +67,9 @@
             <p id="respuesta" aria-live="polite"></p>
         </section>
 
-        <footer>HECHO CON CARIÑO ❤️ PARA NAIVERLYN POLANCO</footer>
+        <footer>
+            HECHO CON CARIÑO ❤️ PARA NAIVERLYN POLANCO
+        </footer>
     </main>
 </body>
 </html>
