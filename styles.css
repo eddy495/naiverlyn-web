@@ -10,7 +10,7 @@
     --rosa: #ff7ca8;
     --rosa-claro: #ffd3e1;
     --fondo: #100609;
-    --tarjeta: rgba(39, 13, 27, 0.91);
+    --tarjeta: rgba(39, 13, 27, 0.88);
 }
 
 html {
@@ -27,12 +27,26 @@ body {
     font-family: Georgia, "Times New Roman", serif;
     color: #fff4f7;
     background:
-        linear-gradient(rgba(16, 6, 9, 0.76), rgba(16, 6, 9, 0.92)),
+        linear-gradient(rgba(16, 6, 9, 0.65), rgba(16, 6, 9, 0.88)),
         url("./fondo-romantico.png") center / cover fixed,
         var(--fondo);
 }
 
+/* Capa de efectos detrás del contenido */
+#efectos-fondo {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Tarjeta principal */
 .tarjeta {
+    position: relative;
+    z-index: 1;
     width: min(100%, 650px);
     padding: 38px 26px;
     text-align: center;
@@ -65,7 +79,7 @@ h1 {
 .rosa {
     margin: 20px 0;
     font-size: 4rem;
-    animation: flotar 3s ease-in-out infinite;
+    animation: flotar-rosa 3s ease-in-out infinite;
 }
 
 .mensaje,
@@ -97,8 +111,7 @@ button {
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
-    transition: transform 0.2s ease, background 0.2s ease,
-        box-shadow 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 button:hover {
@@ -151,23 +164,63 @@ footer {
     line-height: 1.8;
 }
 
+/* Corazones y estrellas creados por JavaScript */
+.particula {
+    position: absolute;
+    bottom: -50px;
+    display: block;
+    opacity: 0;
+    user-select: none;
+    pointer-events: none;
+    line-height: 1;
+    will-change: transform, opacity;
+    animation-name: flotar-fondo;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.particula.corazon {
+    color: #ff80ad;
+    text-shadow: 0 0 12px rgba(255, 77, 136, 0.85);
+}
+
+.particula.estrella {
+    color: #fff2b0;
+    text-shadow: 0 0 12px rgba(255, 228, 122, 0.9);
+}
+
+@keyframes flotar-fondo {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(0.7);
+        opacity: 0;
+    }
+    15% {
+        opacity: 0.85;
+    }
+    80% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-115vh) rotate(35deg) scale(1.2);
+        opacity: 0;
+    }
+}
+
 @keyframes aparecer {
     from {
         opacity: 0;
         transform: translateY(18px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-@keyframes flotar {
+@keyframes flotar-rosa {
     0%, 100% {
         transform: translateY(0);
     }
-
     50% {
         transform: translateY(-9px);
     }
@@ -209,60 +262,7 @@ footer {
         transition-duration: 0.01ms !important;
     }
 
-}
-/* Estrellas y corazones flotantes */
-#efectos-fondo {
-    position: fixed;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-    z-index: 0;
-}
-
-.tarjeta {
-    position: relative;
-    z-index: 1;
-}
-
-.particula {
-    position: absolute;
-    bottom: -50px;
-    opacity: 0;
-    animation: flotar-fondo linear infinite;
-    user-select: none;
-    will-change: transform, opacity;
-}
-
-.particula.corazon {
-    color: #ff80ad;
-    text-shadow: 0 0 12px #ff4d88;
-}
-
-.particula.estrella {
-    color: #fff2b0;
-    text-shadow: 0 0 12px #ffe47a;
-}
-
-@keyframes flotar-fondo {
-    0% {
-        transform: translateY(0) rotate(0deg) scale(.7);
-        opacity: 0;
-    }
-    15% {
-        opacity: .85;
-    }
-    80% {
-        opacity: .8;
-    }
-    100% {
-        transform: translateY(-115vh) rotate(35deg) scale(1.2);
-        opacity: 0;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
     .particula {
-        animation: none;
         display: none;
     }
 }
