@@ -69,3 +69,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
     console.log("Página de Naiverlyn cargada correctamente ❤️");
 });
+
+// Crear estrellas y corazones flotantes.
+(() => {
+    const iniciarEfectos = () => {
+        const fondo = document.getElementById("efectos-fondo");
+        if (!fondo || fondo.dataset.iniciado === "si") return;
+
+        fondo.dataset.iniciado = "si";
+
+        const simbolos = [
+            { texto: "♥", clase: "corazon" },
+            { texto: "♡", clase: "corazon" },
+            { texto: "✦", clase: "estrella" },
+            { texto: "✧", clase: "estrella" },
+            { texto: "⋆", clase: "estrella" }
+        ];
+
+        for (let i = 0; i < 28; i++) {
+            const efecto = simbolos[
+                Math.floor(Math.random() * simbolos.length)
+            ];
+
+            const particula = document.createElement("span");
+            particula.className = `particula ${efecto.clase}`;
+            particula.textContent = efecto.texto;
+            particula.style.left = `${Math.random() * 100}%`;
+            particula.style.fontSize = `${12 + Math.random() * 18}px`;
+            particula.style.animationDuration = `${8 + Math.random() * 12}s`;
+            particula.style.animationDelay = `${-Math.random() * 18}s`;
+
+            fondo.appendChild(particula);
+        }
+    };
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", iniciarEfectos);
+    } else {
+        iniciarEfectos();
+    }
+})();
