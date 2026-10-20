@@ -1,74 +1,71 @@
 
-const abrirBtn = document.getElementById("abrir");
-const carta = document.getElementById("carta");
-const musica = document.getElementById("musica");
-const musicaBtn = document.getElementById("musicaBtn");
-const respuesta = document.getElementById("respuesta");
+"use strict";
 
-// Abrir la carta sorpresa
-abrirBtn.addEventListener("click", () => {
-    carta.hidden = false;
-    abrirBtn.textContent = "Tu sorpresa está aquí ❤️";
-    abrirBtn.disabled = true;
-});
+document.addEventListener("DOMContentLoaded", () => {
+    const botonAbrir = document.getElementById("abrir");
+    const carta = document.getElementById("carta");
+    const botonMusica = document.getElementById("musicaBtn");
+    const musica = document.getElementById("musica");
+    const respuesta = document.getElementById("respuesta");
+    const botonesRespuesta = document.querySelectorAll("[data-respuesta]");
 
-// Activar y pausar la música
-musicaBtn.addEventListener("click", async () => {
-    if (musica.paused) {
-        try {
-            await musica.play();
-            musicaBtn.textContent = "♫ Pausar música";
-        } catch (error) {
-            musicaBtn.textContent = "No se pudo reproducir";
-            alert(
-                "Comprueba que musica.mp3 esté en la misma carpeta."
-            );
-        }
-    } else {
-        musica.pause();
-        musicaBtn.textContent = "♫ Activar música";
-    }
-});
+    // Abrir y cerrar la sorpresa.
+    if (botonAbrir && carta) {
+        botonAbrir.addEventListener("click", () => {
+            const estaOculta = carta.hidden;
 
-// Respuestas a la pregunta especial
-document.querySelectorAll("[data-respuesta]").forEach((boton) => {
-    boton.addEventListener("click", () => {
-        if (boton.dataset.respuesta === "si") {
-            respuesta.textContent =
-                "Me alegra mucho leer eso. Gracias por darme la oportunidad ❤️🌹";
-        } else {
-            respuesta.textContent =
-                "No hay prisa. Lo importante es que te sientas cómoda y seas sincera. 💌";
-        }
-    });
-});
+            carta.hidden = !estaOculta;
 
-// Corazones flotantes
-const movimientoReducido = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-);
-
-if (!movimientoReducido.matches) {
-    const simbolos = ["❤️", "♡", "♥", "✨"];
-
-    function crearCorazon() {
-        const corazon = document.createElement("span");
-
-        corazon.className = "corazon";
-        corazon.textContent =
-            simbolos[Math.floor(Math.random() * simbolos.length)];
-
-        corazon.style.left = Math.random() * 100 + "vw";
-        corazon.style.fontSize = (12 + Math.random() * 18) + "px";
-        corazon.style.animationDuration =
-            (6 + Math.random() * 6) + "s";
-
-        document.body.appendChild(corazon);
-
-        corazon.addEventListener("animationend", () => {
-            corazon.remove();
+            if (estaOculta) {
+                botonAbrir.textContent = "Cerrar mi sorpresa 💌";
+                carta.scrollIntoView({
+                    behavior: "smooth",
+                    block: "nearest"
+                });
+            } else {
+                botonAbrir.textContent = "Descubre tu sorpresa 💌";
+            }
         });
     }
 
-    setInterval(crearCorazon, 650);
-}
+    // Reproducir o pausar la música.
+    if (botonMusica && musica) {
+        botonMusica.addEventListener("click", async () => {
+            if (musica.paused) {
+                try {
+                    await musica.play();
+                    botonMusica.textContent = "Ⅱ Pausar música";
+                } catch (error) {
+                    botonMusica.textContent = "No se pudo reproducir ♫";
+                    console.error("Error al reproducir la música:", error);
+                }
+            } else {
+                musica.pause();
+                botonMusica.textContent = "♫ Activar música";
+            }
+        });
+
+        musica.addEventListener("ended", () => {
+            botonMusica.textContent = "♫ Activar música";
+        });
+    }
+
+    // Mostrar el mensaje según la respuesta.
+    botonesRespuesta.forEach((boton) => {
+        boton.addEventListener("click", () => {
+            if (!respuesta) return;
+
+            const opcion = boton.dataset.respuesta;
+
+            if (opcion === "si") {
+                respuesta.textContent =
+                    "¡Me alegra mucho! ❤️ Gracias por darme la oportunidad.";
+            } else if (opcion === "pensar") {
+                respuesta.textContent =
+                    "Está bien. Tómate tu tiempo; lo importante es que te sientas cómoda. 💗";
+            }
+        });
+    });
+
+    console.log("Página de Naiverlyn cargada correctamente ❤️");
+});
