@@ -1,75 +1,171 @@
-
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#100609">
+
     <title>Para Naiverlyn Polanco ❤️</title>
-    <meta name="description" content="Un detalle romántico para Naiverlyn Polanco.">
 
-    <link rel="stylesheet" href="./styles.css?v=4">
-    <script src="./Script.js?v=4" defer></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <!-- Aquí aparecerán las estrellas y los corazones -->
-    <div id="efectos-fondo" aria-hidden="true"></div>
 
-    <main class="tarjeta">
-        <div class="etiqueta">
-            Un pequeño detalle para alguien especial
-        </div>
+    <!-- Fondo -->
+    <div id="stars"></div>
+    <div id="hearts"></div>
 
-        <h1>Naiverlyn Polanco ❤️</h1>
+    <!-- Música -->
+    <audio id="music" loop>
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
 
-        <div class="rosa" aria-hidden="true">🌹</div>
+    <!-- Pantalla inicial -->
+    <section id="inicio" class="pantalla activa">
 
-        <p class="mensaje">
-            Hay personas que llegan sin avisar y, poco a poco,
-            hacen que un día normal se vuelva especial.
-            <br><br>
-            Quería dedicarte este pequeño rincón,
-            porque hay cosas bonitas que merecen ser expresadas.
-        </p>
+        <div class="contenido">
 
-        <div class="controles">
-            <button id="abrir" type="button">
-                Descubre tu sorpresa 💌
-            </button>
+            <div class="corazon-principal">❤️</div>
 
-            <button id="musicaBtn" type="button">
-                ♫ Activar música
-            </button>
-        </div>
+            <p class="pequeno">Hay algo que quiero decirte...</p>
 
-        <audio id="musica" src="./musica.mp3" loop preload="none"></audio>
+            <h1>
+                Naiverlyn<br>
+                <span>Polanco</span>
+            </h1>
 
-        <section id="carta" hidden>
-            <p class="texto-carta">
-                Naiverlyn, quería que supieras que me gusta tu forma
-                de ser y que me alegra poder conocerte.
-                <br><br>
-                No sé qué nos tenga preparado el futuro,
-                pero sí quería regalarte este detalle y sacarte
-                una sonrisa. ❤️
+            <p class="subtitulo">
+                Quizás no encuentre las palabras perfectas,
+                pero quiero intentarlo.
             </p>
 
-            <h2>¿Me dejarías conocerte un poquito más? 🌹</h2>
+            <button onclick="comenzar()">
+                Descubrir mi mensaje
+                <span>♡</span>
+            </button>
 
-            <div class="botones-respuesta">
-                <button type="button" data-respuesta="si">
-                    Sí ❤️
-                </button>
+        </div>
 
-                <button type="button" data-respuesta="pensar">
-                    Quiero pensarlo 💌
-                </button>
+    </section>
+
+
+    <!-- Declaración -->
+    <section id="declaracion" class="pantalla">
+
+        <div class="carta">
+
+            <div class="sobre">💌</div>
+
+            <p class="destinataria">
+                Para ti, Naiverlyn Polanco
+            </p>
+
+            <h2>
+                Hay algo que llevo<br>
+                tiempo queriendo decirte...
+            </h2>
+
+            <div class="linea"></div>
+
+            <p id="textoDeclaracion" class="texto"></p>
+
+            <button id="continuarBtn" class="oculto" onclick="mostrarFinal()">
+                Hay algo más...
+                ❤️
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- Final -->
+    <section id="final" class="pantalla">
+
+        <div class="final-contenido">
+
+            <div class="gran-corazon">❤️</div>
+
+            <p class="para-ti">
+                Naiverlyn Polanco
+            </p>
+
+            <h2>
+                Me gustas.<br>
+                Me importas.<br>
+                Y estoy enamorado de ti.
+            </h2>
+
+            <p class="mensaje-final">
+                No quiero que esto sea solamente unas palabras bonitas
+                escritas en una pantalla.
+                
+                Quiero que sepas que lo que siento por ti es sincero.
+                Que cuando pienso en ti, sonrío.
+                Que tu presencia puede cambiar completamente mi día.
+                
+                Y si me das la oportunidad,
+                quiero demostrarte con hechos todo lo que estas palabras
+                intentan explicar.
+            </p>
+
+            <div class="pregunta">
+                <span>❤️</span>
+
+                <h3>
+                    ¿Me permites intentar<br>
+                    hacerte feliz?
+                </h3>
+
+                <div class="botones">
+
+                    <button class="si" onclick="respuestaSi()">
+                        Sí ❤️
+                    </button>
+
+                    <button class="no" id="noBtn">
+                        Necesito pensarlo
+                    </button>
+
+                </div>
+
             </div>
 
-            <p id="respuesta" aria-live="polite"></p>
-        </section>
+        </div>
 
-        <footer>HECHO CON CARIÑO ❤️ PARA NAIVERLYN POLANCO</footer>
-    </main>
+    </section>
+
+
+    <!-- Respuesta -->
+    <div id="respuesta" class="respuesta oculto">
+
+        <div class="respuesta-caja">
+
+            <div class="gran-corazon">💖</div>
+
+            <h2>
+                Gracias por escuchar<br>
+                lo que siento.
+            </h2>
+
+            <p>
+                Sea cual sea tu respuesta,
+                quería que supieras lo importante que eres para mí.
+            </p>
+
+            <div class="firma">
+                Con cariño,<br>
+                <strong>Enyer Alexander</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
 </body>
 </html>
+```
