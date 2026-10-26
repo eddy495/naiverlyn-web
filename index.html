@@ -5,50 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#100813">
   <title>Para Naiverlyn Polanco ❤️</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="styles.css?v=3">
 </head>
 <body>
   <div id="stars" aria-hidden="true"></div>
   <div id="hearts" aria-hidden="true"></div>
-
-  <audio id="music" loop preload="none">
-    <source src="musica.mp3" type="audio/mpeg">
-  </audio>
+  <audio id="music" loop preload="none"><source src="musica.mp3" type="audio/mpeg"></audio>
 
   <main>
-    <section id="inicio" class="pantalla activa" aria-labelledby="tituloInicio">
+    <section id="inicio" class="pantalla activa">
       <div class="contenido">
-        <div class="corazon-principal" aria-hidden="true">❤️</div>
+        <div class="corazon-principal">❤️</div>
         <p class="pequeno">Hay algo que quiero decirte...</p>
-        <h1 id="tituloInicio">Naiverlyn<br><span>Polanco</span></h1>
+        <h1>Naiverlyn<br><span>Polanco</span></h1>
         <p class="subtitulo">Quizás no encuentre las palabras perfectas, pero quiero hablarte desde el corazón.</p>
-        <button id="comenzarBtn" type="button">Descubrir mi mensaje <span aria-hidden="true">♡</span></button>
-        <p class="nota-musica">Activa la música al comenzar, si el archivo está disponible.</p>
+        <button id="comenzarBtn" type="button">Descubrir mi mensaje ♡</button>
+        <p class="nota-musica">La música comenzará si el archivo está disponible.</p>
       </div>
     </section>
 
-    <section id="declaracion" class="pantalla" aria-labelledby="tituloCarta" hidden>
+    <section id="declaracion" class="pantalla" hidden>
       <article class="carta">
-        <div class="sobre" aria-hidden="true">💌</div>
+        <div class="sobre">💌</div>
         <p class="destinataria">Para ti, Naiverlyn Polanco</p>
-        <h2 id="tituloCarta">Hay algo que llevo tiempo queriendo decirte...</h2>
+        <h2>Hay algo que llevo tiempo queriendo decirte...</h2>
         <div class="linea"></div>
-        <p id="textoDeclaracion" class="texto" aria-live="polite"></p>
+        <p id="textoDeclaracion" class="texto"></p>
         <button id="continuarBtn" class="oculto" type="button">Hay algo más... ❤️</button>
       </article>
     </section>
 
-    <section id="final" class="pantalla" aria-labelledby="tituloFinal" hidden>
+    <section id="final" class="pantalla" hidden>
       <div class="final-contenido">
-        <div class="gran-corazon" aria-hidden="true">❤️</div>
+        <div class="gran-corazon">❤️</div>
         <p class="para-ti">Naiverlyn Polanco</p>
-        <h2 id="tituloFinal">Me gustas.<br>Me importas.<br>Y quiero ser sincero contigo.</h2>
+        <h2>Me gustas.<br>Me importas.<br>Y quiero ser sincero contigo.</h2>
         <p class="mensaje-final">No quiero que esto sea solamente unas palabras bonitas escritas en una pantalla. Quiero que sepas que lo que siento por ti es sincero. Cuando pienso en ti, sonrío, y me gustaría seguir conociéndote y compartir más momentos contigo.
 
 No te prometo ser perfecto; sí quiero tratarte con cariño, respeto y honestidad. No sé qué nos tenga preparado el futuro, pero me gustaría descubrirlo poco a poco, si tú también lo deseas.</p>
         <div class="pregunta">
-          <span aria-hidden="true">♡</span>
+          <span>♡</span>
           <h3>¿Te gustaría darme la oportunidad de conocernos más y ver qué puede nacer entre nosotros?</h3>
           <div class="botones">
             <button id="siBtn" class="si" type="button">Sí, me gustaría ❤️</button>
@@ -62,8 +58,92 @@ No te prometo ser perfecto; sí quiero tratarte con cariño, respeto y honestida
     </section>
   </main>
 
-  <script>
-    // Si no has añadido musica.mp3 al repositorio, la página seguirá funcionando sin música.
-  </script>
+<script>
+(function () {
+  "use strict";
+  const $ = id => document.getElementById(id);
+  const stars = $("stars"), hearts = $("hearts");
+  // El script está dentro de index.html para que el botón inicial no dependa de otro archivo.
+  for (let i = 0; i < 140; i++) {
+    const s = document.createElement("span");
+    s.className = "star";
+    const size = Math.random() * 2 + 1;
+    s.style.width = size + "px"; s.style.height = size + "px";
+    s.style.left = Math.random() * 100 + "%"; s.style.top = Math.random() * 100 + "%";
+    s.style.animationDelay = Math.random() * 4 + "s";
+    s.style.animationDuration = (2 + Math.random() * 3) + "s";
+    stars.appendChild(s);
+  }
+  function heart() {
+    const h = document.createElement("span");
+    h.className = "heart";
+    h.textContent = ["❤","♡","♥","💕","💗"][Math.floor(Math.random()*5)];
+    h.style.left = Math.random()*100 + "%";
+    h.style.fontSize = (13 + Math.random()*18) + "px";
+    h.style.animationDuration = (6 + Math.random()*5) + "s";
+    h.style.setProperty("--deriva", (Math.random()*90-45) + "px");
+    hearts.appendChild(h);
+    setTimeout(() => h.remove(), 12000);
+  }
+  setInterval(heart, 700);
+
+  const message = `Naiverlyn Polanco,
+
+Hay sentimientos que aparecen poco a poco, casi sin avisar, hasta que un día te das cuenta de que alguien se ha vuelto una persona muy especial para ti.
+
+Eso me ha pasado contigo. No sé si encontraré las palabras perfectas para explicártelo, pero quiero ser sincero y hablarte desde el corazón.
+
+Me gusta tu forma de ser, me gusta hablar contigo y me gusta la alegría que siento cuando compartimos un momento. Cada vez tengo más ganas de conocerte, de saber qué te hace sonreír y de descubrir todas esas cosas que te hacen ser tú.
+
+No te escribo para presionarte ni para pedirte que me respondas algo que no sientes. Te escribo porque creo que mereces saber lo que pasa por mi corazón.
+
+Naiverlyn, me gustas de una manera especial. Me estoy enamorando de ti y quería tener el valor de decírtelo en vez de guardar estas palabras para mí.
+
+No puedo prometerte una historia perfecta, pero sí puedo ofrecerte sinceridad, respeto y la intención de demostrar con hechos lo que digo. Me gustaría que pudiéramos conocernos más, compartir momentos bonitos y ver, con calma, si nuestros sentimientos pueden crecer.
+
+No sé qué nos traerá el futuro, y no quiero apresurar nada. Solo quería que supieras que eres alguien especial para mí y que lo que siento es real.
+
+Con cariño, desde lo más sincero de mi corazón. ❤️`;
+
+  let index = 0, typing = false, done = false;
+  function show(id) {
+    ["inicio","declaracion","final"].forEach(name => {
+      const section = $(name);
+      section.hidden = name !== id;
+      section.classList.toggle("activa", name === id);
+    });
+    window.scrollTo(0,0);
+  }
+  $("comenzarBtn").addEventListener("click", function () {
+    show("declaracion");
+    const music = $("music");
+    if (music) { music.volume = .35; music.play().catch(() => {}); }
+    if (typing || done) return;
+    typing = true;
+    const target = $("textoDeclaracion");
+    function typeNext() {
+      if (index < message.length) {
+        target.textContent += message.charAt(index++);
+        setTimeout(typeNext, 18);
+      } else {
+        typing = false; done = true;
+        $("continuarBtn").classList.remove("oculto");
+      }
+    }
+    typeNext();
+  });
+  $("continuarBtn").addEventListener("click", () => show("final"));
+  $("siBtn").addEventListener("click", () => {
+    $("respuestaTexto").textContent = "Gracias por darme esta oportunidad. ❤️ Me gustaría que avancemos con sinceridad y a nuestro ritmo.";
+    for (let i=0; i<24; i++) setTimeout(heart, i*90);
+  });
+  $("pensarloBtn").addEventListener("click", () => {
+    $("respuestaTexto").textContent = "Claro, tómate tu tiempo. No tienes que responder ahora; respeto lo que sientas. ❤️";
+  });
+  $("noBtn").addEventListener("click", () => {
+    $("respuestaTexto").textContent = "Gracias por ser sincera conmigo. Respeto tus sentimientos y no quiero que te sientas presionada. ❤️";
+  });
+})();
+</script>
 </body>
 </html>
