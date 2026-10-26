@@ -1,268 +1,561 @@
-
+```css
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
-}
-
-:root {
-    color-scheme: dark;
-    --rosa: #ff7ca8;
-    --rosa-claro: #ffd3e1;
-    --fondo: #100609;
-    --tarjeta: rgba(39, 13, 27, 0.88);
+    box-sizing: border-box;
 }
 
 html {
-    min-height: 100%;
     scroll-behavior: smooth;
 }
 
 body {
-    min-height: 100vh;
-    padding: 28px 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: Georgia, "Times New Roman", serif;
-    color: #fff4f7;
     background:
-        linear-gradient(rgba(16, 6, 9, 0.65), rgba(16, 6, 9, 0.88)),
-        url("./fondo-romantico.png") center / cover fixed,
-        var(--fondo);
+        radial-gradient(circle at 50% 30%, #24132c 0%, #100a16 45%, #050507 100%);
+    color: white;
+    font-family: Georgia, "Times New Roman", serif;
+    overflow-x: hidden;
+    min-height: 100vh;
 }
 
-/* Capa de efectos detrás del contenido */
-#efectos-fondo {
+
+/* =========================
+   ESTRELLAS
+========================= */
+
+#stars {
     position: fixed;
     inset: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden;
     pointer-events: none;
     z-index: 0;
+    overflow: hidden;
 }
 
-/* Tarjeta principal */
-.tarjeta {
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: parpadear 3s infinite ease-in-out;
+}
+
+@keyframes parpadear {
+    0%, 100% {
+        opacity: 0.2;
+        transform: scale(0.7);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+}
+
+
+/* =========================
+   CORAZONES FLOTANTES
+========================= */
+
+#hearts {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.heart {
+    position: absolute;
+    bottom: -50px;
+    color: #ff6b91;
+    font-size: 18px;
+    animation: subir 7s linear forwards;
+    opacity: 0;
+    filter: drop-shadow(0 0 8px rgba(255, 70, 120, 0.6));
+}
+
+@keyframes subir {
+
+    0% {
+        transform:
+            translateY(0)
+            translateX(0)
+            rotate(0deg)
+            scale(0.7);
+
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.8;
+    }
+
+    50% {
+        transform:
+            translateY(-50vh)
+            translateX(30px)
+            rotate(20deg)
+            scale(1);
+    }
+
+    100% {
+        transform:
+            translateY(-115vh)
+            translateX(-40px)
+            rotate(-20deg)
+            scale(1.3);
+
+        opacity: 0;
+    }
+}
+
+
+/* =========================
+   PANTALLAS
+========================= */
+
+.pantalla {
     position: relative;
-    z-index: 1;
-    width: min(100%, 650px);
-    padding: 38px 26px;
-    text-align: center;
-    border: 1px solid rgba(255, 124, 168, 0.45);
-    border-radius: 26px;
-    background: var(--tarjeta);
-    box-shadow: 0 20px 70px rgba(0, 0, 0, 0.55);
-    backdrop-filter: blur(8px);
-    animation: aparecer 1s ease both;
+    z-index: 3;
+
+    min-height: 100vh;
+    width: 100%;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px 20px;
 }
 
-.etiqueta {
-    display: inline-block;
-    margin-bottom: 18px;
-    padding: 8px 15px;
-    border: 1px solid rgba(255, 124, 168, 0.4);
-    border-radius: 30px;
-    color: var(--rosa-claro);
-    font-size: 0.85rem;
-    letter-spacing: 1px;
+.pantalla.activa {
+    display: flex;
+}
+
+
+/* =========================
+   INICIO
+========================= */
+
+.contenido {
+    width: min(700px, 100%);
+    text-align: center;
+    animation: aparecer 1.5s ease;
+}
+
+.corazon-principal {
+    font-size: 70px;
+    margin-bottom: 25px;
+
+    animation:
+        latido 1.7s infinite ease-in-out;
+
+    filter:
+        drop-shadow(0 0 20px rgba(255, 80, 120, 0.7));
+}
+
+.pequeno {
+    color: #d8b8c6;
+    font-size: 18px;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
 }
 
 h1 {
-    margin-bottom: 12px;
-    color: var(--rosa-claro);
-    font-size: clamp(2rem, 7vw, 3.2rem);
-    text-shadow: 0 0 24px rgba(255, 124, 168, 0.45);
+    font-size: clamp(55px, 10vw, 100px);
+    line-height: 0.95;
+    font-weight: normal;
+
+    text-shadow:
+        0 0 15px rgba(255,255,255,0.15),
+        0 0 40px rgba(255,80,120,0.25);
 }
 
-.rosa {
-    margin: 20px 0;
-    font-size: 4rem;
-    animation: flotar-rosa 3s ease-in-out infinite;
+h1 span {
+    font-size: 0.65em;
+    color: #ff8eae;
+    font-style: italic;
 }
 
-.mensaje,
-.texto-carta {
-    max-width: 510px;
-    margin: 0 auto;
-    color: #f8dfe8;
-    font-size: 1.08rem;
-    line-height: 1.9;
-}
+.subtitulo {
+    margin: 35px auto;
+    max-width: 550px;
 
-.controles,
-.botones-respuesta {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 25px;
-}
-
-button {
-    min-height: 46px;
-    padding: 13px 20px;
-    border: 1px solid var(--rosa);
-    border-radius: 30px;
-    background: var(--rosa);
-    color: #2b0917;
-    font-family: inherit;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 7px 24px rgba(255, 124, 168, 0.25);
-}
-
-button:focus-visible {
-    outline: 3px solid white;
-    outline-offset: 4px;
-}
-
-#musicaBtn {
-    background: transparent;
-    color: var(--rosa-claro);
-}
-
-#carta {
-    margin-top: 30px;
-    padding-top: 25px;
-    border-top: 1px solid rgba(255, 124, 168, 0.35);
-    animation: aparecer 0.7s ease both;
-}
-
-#carta[hidden] {
-    display: none;
-}
-
-h2 {
-    margin-top: 24px;
-    color: var(--rosa-claro);
-    font-size: clamp(1.3rem, 5vw, 1.8rem);
-    line-height: 1.5;
-}
-
-#respuesta {
-    min-height: 30px;
-    margin-top: 20px;
-    color: var(--rosa-claro);
-    font-size: 1.05rem;
-    line-height: 1.7;
-}
-
-footer {
-    margin-top: 35px;
-    color: #d9a8ba;
-    font-family: Arial, sans-serif;
-    font-size: 0.72rem;
-    letter-spacing: 1.5px;
+    color: #cbbbc4;
+    font-size: 18px;
     line-height: 1.8;
 }
 
-/* Corazones y estrellas creados por JavaScript */
-.particula {
-    position: absolute;
-    bottom: -50px;
-    display: block;
-    opacity: 0;
-    user-select: none;
-    pointer-events: none;
-    line-height: 1;
-    will-change: transform, opacity;
-    animation-name: flotar-fondo;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
+button {
+    border: 1px solid rgba(255, 150, 180, 0.5);
+    background: rgba(255,255,255,0.05);
+    color: white;
+
+    padding: 15px 28px;
+    border-radius: 50px;
+
+    font-size: 16px;
+    font-family: inherit;
+
+    cursor: pointer;
+
+    transition:
+        0.3s ease;
+
+    backdrop-filter: blur(8px);
 }
 
-.particula.corazon {
-    color: #ff80ad;
-    text-shadow: 0 0 12px rgba(255, 77, 136, 0.85);
+button:hover {
+    background: rgba(255, 100, 140, 0.18);
+
+    transform:
+        translateY(-3px)
+        scale(1.03);
+
+    box-shadow:
+        0 0 25px rgba(255, 80, 130, 0.3);
 }
 
-.particula.estrella {
-    color: #fff2b0;
-    text-shadow: 0 0 12px rgba(255, 228, 122, 0.9);
+
+/* =========================
+   CARTA
+========================= */
+
+.carta {
+    width: min(800px, 100%);
+
+    padding: 50px 35px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.07),
+            rgba(255,255,255,0.02)
+        );
+
+    border:
+        1px solid rgba(255,255,255,0.12);
+
+    border-radius: 25px;
+
+    backdrop-filter: blur(15px);
+
+    box-shadow:
+        0 0 60px rgba(0,0,0,0.4);
+
+    animation:
+        subirCarta 1s ease;
 }
 
-@keyframes flotar-fondo {
-    0% {
-        transform: translateY(0) rotate(0deg) scale(0.7);
-        opacity: 0;
-    }
-    15% {
-        opacity: 0.85;
-    }
-    80% {
-        opacity: 0.8;
-    }
-    100% {
-        transform: translateY(-115vh) rotate(35deg) scale(1.2);
-        opacity: 0;
-    }
+.sobre {
+    font-size: 60px;
+    margin-bottom: 20px;
 }
+
+.destinataria {
+    color: #ff91b0;
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+.carta h2 {
+    font-size: clamp(30px, 6vw, 52px);
+    font-weight: normal;
+    line-height: 1.2;
+}
+
+.linea {
+    width: 80px;
+    height: 1px;
+
+    background: #ff7fa3;
+
+    margin: 30px auto;
+}
+
+.texto {
+    min-height: 220px;
+
+    max-width: 680px;
+
+    margin: auto;
+
+    color: #e8dce1;
+
+    font-size: 19px;
+    line-height: 2;
+
+    text-align: left;
+
+    white-space: pre-line;
+}
+
+#continuarBtn {
+    margin-top: 30px;
+}
+
+.oculto {
+    display: none !important;
+}
+
+
+/* =========================
+   FINAL
+========================= */
+
+.final-contenido {
+    width: min(800px, 100%);
+    text-align: center;
+
+    animation: aparecer 1.2s ease;
+}
+
+.gran-corazon {
+    font-size: 90px;
+
+    animation: latido 1.5s infinite ease-in-out;
+
+    filter:
+        drop-shadow(0 0 25px rgba(255,70,120,0.7));
+}
+
+.para-ti {
+    color: #ff8eae;
+    letter-spacing: 3px;
+    margin: 20px 0;
+}
+
+.final-contenido h2 {
+    font-size: clamp(34px, 7vw, 60px);
+    font-weight: normal;
+    line-height: 1.2;
+}
+
+.mensaje-final {
+    margin: 35px auto;
+
+    max-width: 700px;
+
+    color: #d9cbd1;
+
+    font-size: 18px;
+    line-height: 2;
+
+    white-space: pre-line;
+}
+
+.pregunta {
+    margin-top: 50px;
+    padding: 35px;
+
+    border-top:
+        1px solid rgba(255,255,255,0.1);
+
+    border-bottom:
+        1px solid rgba(255,255,255,0.1);
+}
+
+.pregunta span {
+    font-size: 30px;
+}
+
+.pregunta h3 {
+    margin: 15px 0 25px;
+
+    font-size: 27px;
+    font-weight: normal;
+}
+
+.botones {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.si {
+    background: rgba(255,70,120,0.2);
+    border-color: #ff7098;
+}
+
+.no {
+    position: relative;
+}
+
+
+/* =========================
+   RESPUESTA
+========================= */
+
+.respuesta {
+    position: fixed;
+    inset: 0;
+
+    z-index: 20;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 25px;
+
+    background:
+        rgba(5, 3, 8, 0.92);
+
+    backdrop-filter: blur(10px);
+}
+
+.respuesta-caja {
+    width: min(600px, 100%);
+
+    text-align: center;
+
+    padding: 50px 30px;
+
+    border:
+        1px solid rgba(255,120,160,0.35);
+
+    border-radius: 25px;
+
+    background:
+        rgba(30,15,35,0.9);
+
+    box-shadow:
+        0 0 70px rgba(255,60,120,0.15);
+
+    animation:
+        aparecer 0.8s ease;
+}
+
+.respuesta-caja h2 {
+    font-size: 36px;
+    font-weight: normal;
+    line-height: 1.3;
+    margin: 20px 0;
+}
+
+.respuesta-caja p {
+    color: #d8cbd1;
+    line-height: 1.8;
+    font-size: 17px;
+}
+
+.firma {
+    margin-top: 30px;
+    color: #ff91b0;
+    line-height: 1.8;
+}
+
+
+/* =========================
+   ANIMACIONES
+========================= */
 
 @keyframes aparecer {
     from {
         opacity: 0;
-        transform: translateY(18px);
+        transform: translateY(25px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-@keyframes flotar-rosa {
+@keyframes subirCarta {
+    from {
+        opacity: 0;
+        transform:
+            translateY(50px)
+            scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+@keyframes latido {
+
     0%, 100% {
-        transform: translateY(0);
+        transform: scale(1);
     }
+
     50% {
-        transform: translateY(-9px);
+        transform: scale(1.12);
     }
 }
 
-@media (max-width: 480px) {
-    body {
-        padding: 16px 10px;
-        background-attachment: scroll;
+
+/* =========================
+   MÓVIL
+========================= */
+
+@media (max-width: 600px) {
+
+    .pantalla {
+        padding: 25px 15px;
     }
 
-    .tarjeta {
-        padding: 28px 18px;
-        border-radius: 20px;
+    .corazon-principal {
+        font-size: 55px;
     }
 
-    .mensaje,
-    .texto-carta {
-        font-size: 1rem;
+    .pequeno {
+        font-size: 15px;
     }
 
-    .controles,
-    .botones-respuesta {
-        flex-direction: column;
+    .subtitulo {
+        font-size: 16px;
+        line-height: 1.7;
     }
 
-    button {
-        width: 100%;
+    .carta {
+        padding: 35px 22px;
+    }
+
+    .sobre {
+        font-size: 50px;
+    }
+
+    .texto {
+        font-size: 17px;
+        line-height: 1.8;
+    }
+
+    .gran-corazon {
+        font-size: 70px;
+    }
+
+    .mensaje-final {
+        font-size: 16px;
+        line-height: 1.8;
+    }
+
+    .pregunta {
+        padding: 25px 10px;
+    }
+
+    .pregunta h3 {
+        font-size: 23px;
+    }
+
+    .respuesta-caja {
+        padding: 40px 20px;
+    }
+
+    .respuesta-caja h2 {
+        font-size: 29px;
     }
 }
-
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-        transition-duration: 0.01ms !important;
-    }
-
-    .particula {
-        display: none;
-    }
-}
+```
